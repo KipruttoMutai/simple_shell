@@ -4,7 +4,7 @@
  * @str: The string to print
  * Return: Void
  */
-void custom_puts(char *str)
+void br_puts(char *str)
 {
 	size_t len;
 	ssize_t result;
