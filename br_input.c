@@ -5,7 +5,7 @@
  */
 char *get_input(void)
 {
-	static char *previous_input;
+	char *previous_input;
 	char *input = NULL;
 	size_t input_size = 0;
 	ssize_t read_result;
