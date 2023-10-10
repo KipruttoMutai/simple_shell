@@ -11,6 +11,10 @@
 /*SHELL PROMPT FUNCTION*/
 void prompt(void);
 
+/*INPUT FUNCTIONS*/
+char *get_input(void);
+void br_puts(char *str);
+
 /*STRING FUNCTIONS*/
 int br_strlen(const char *s);
 
