@@ -10,6 +10,7 @@ int execute(char **argv)
 	int status = 0;
 	char *cmd_path;
 	char *envp[2];
+
 	if (!argv || !*argv)
 		return (status);
 	if (check_for_builtin(argv))
@@ -81,6 +82,6 @@ int main(void)
 		free_tokens(args);
 		status = 1;
 	} while (status);
-	return("EXIT_SUCCESS");
+	return ("EXIT_SUCCESS");
 }
 
