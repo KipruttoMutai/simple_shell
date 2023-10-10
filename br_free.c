@@ -12,3 +12,12 @@ void free_tokens(char **ptr)
 		free((ptr[i]));
 	free(ptr);
 }
+
+/**
+ * free_last_input - frees the last user input
+ **/
+void free_last_input(void)
+{
+	free(last_input);
+	last_input = NULL;
+}
