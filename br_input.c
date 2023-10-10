@@ -24,3 +24,24 @@ char *get_input(void)
 	/*previous_input = input;*/
 	return (input);
 }
+
+/**
+ * tokenize_input - splits a user input string into tokens
+ * @input: the user input string to be tokenized
+ * Return: an array of pointers to the tokens, or NULL if an error occurs
+ */
+char **tokenize_input(char *input)
+{
+	char **tokens = NULL;
+	char *input_copy = NULL;
+
+	input_copy = br_strdup(input);
+	if (input_copy == NULL)
+	{
+		br_puts("Malloc error");
+		exit(EXIT_FAILURE);
+	}
+	tokens = tokenize(input_copy, " \t\r\n\a");
+	free(input_copy);
+	return (tokens);
+}
