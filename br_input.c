@@ -5,7 +5,7 @@
  */
 char *get_input(void)
 {
-	char *previous_input;
+	/*char *previous_input;*/
 	char *input = NULL;
 	size_t input_size = 0;
 	ssize_t read_result;
@@ -21,6 +21,6 @@ char *get_input(void)
 		}
 		input[read_result - 1] = '\0';
 	} while (input[0] == '\0' || isspace(input[0]));
-	previous_input = input;
+	/*previous_input = input;*/
 	return (input);
 }
