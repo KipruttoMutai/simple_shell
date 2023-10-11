@@ -9,7 +9,7 @@ void handle_sigint(int sig)
 {
 	(void) sig;
 	br_putchar('\n');
-	br_prompt();
+	prompt();
 }
 
 /**
@@ -33,5 +33,5 @@ void handle_sigstp(int sig)
 {
 	(void) sig;
 	br_puts("\n");
-	br_prompt();
+	prompt();
 }
