@@ -17,6 +17,7 @@ char *get_path(void)
  */
 char *find_in_path(char *command)
 {
+	int i;
 	char *full_path;
 	char *path;
 	char **dirs;
@@ -33,7 +34,7 @@ char *find_in_path(char *command)
 		return (NULL);
 	}
 	full_path = NULL;
-	for (int i = 0; dirs[i] != NULL; i++)
+	for (i = 0; dirs[i] != NULL; i++)
 	{
 		snprintf(buf, PATH_MAX_LENGTH, "%s/%s", dirs[i], command);
 		if (stat(buf, &st) == 0 && S_ISREG(st.st_mode) && (st.st_mode & S_IXUSR))
