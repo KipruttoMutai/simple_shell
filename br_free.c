@@ -1,4 +1,5 @@
 #include "shell.h"
+static char *last_input;
 /**
  * free_tokens - frees memory allocated dynamically by tokenize()
  * @ptr: pointer to allocated memory
