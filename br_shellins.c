@@ -56,7 +56,7 @@ int br_env(void)
 	for (i = 0; environ[i]; i++)
 	{
 		br_puts(environ[i]);
-		br_puts('\n');
+		br_putchar('\n');
 	}
 
 	return (0);
