@@ -82,6 +82,6 @@ int main(void)
 		free_tokens(args);
 		status = 1;
 	} while (status);
-	return ("EXIT_SUCCESS");
+	return (0);
 }
 
