@@ -30,6 +30,7 @@ void prompt(void);
 char *get_input(void);
 void br_puts(char *str);
 char **tokenize_input(char *input);
+int br_putchar(char c);
 
 /**ENVIRONMENT FUNCTIONS*/
 char *br_getenv(const char *name);
@@ -64,5 +65,10 @@ int br_strncmp(const char *s1, const char *s2, size_t n);
 /*MAIN FUNCTION*/
 int execute(char **argv);
 int main(void);
+
+/*SIGNAL FUNCTIONS*/
+void handle_sigint(int sig);
+void handle_sigquit(int sig);
+void handle_sigstp(int sig);
 
 #endif
