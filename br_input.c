@@ -1,4 +1,5 @@
 #include "shell.h"
+static char *last_input;
 /**
  * get_input - Read the line of input from the user.
  * Return: Pointer to a buffer containing the user's input.
@@ -21,7 +22,7 @@ char *get_input(void)
 		}
 		input[read_result - 1] = '\0';
 	} while (input[0] == '\0' || isspace(input[0]));
-	/*previous_input = input;*/
+	last_input = input;
 	return (input);
 }
 
