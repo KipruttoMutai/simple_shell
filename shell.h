@@ -31,6 +31,7 @@ char *get_input(void);
 void br_puts(char *str);
 char **tokenize_input(char *input);
 int br_putchar(char c);
+char **tokenize(char *str, const char *delim);
 
 /**ENVIRONMENT FUNCTIONS*/
 char *br_getenv(const char *name);

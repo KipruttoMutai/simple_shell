@@ -45,7 +45,7 @@ char **tokenize(char *str, const char *delim)
 		if (ret == NULL)
 			return (NULL);
 
-		ret[i] = malloc(_strlen(token) + 1);
+		ret[i] = malloc(br_strlen(token) + 1);
 		if (!(ret[i]))
 			return (NULL);
 
