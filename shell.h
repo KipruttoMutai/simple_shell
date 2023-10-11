@@ -62,6 +62,7 @@ char *br_strdup(const char *str);
 int br_strcmp(const char *s1, const char *s2);
 int br_atoi(const char *str);
 int br_strncmp(const char *s1, const char *s2, size_t n);
+char *br_strcpy(char *dest, char *src);
 
 /*MAIN FUNCTION*/
 int execute(char **argv);
