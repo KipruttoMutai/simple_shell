@@ -27,6 +27,41 @@ char *get_input(void)
 }
 
 /**
+ * tokenize - splits an array string into tokens using a delimiter.
+ * @str: the string to be tokenized.
+ * @delim: the delimiter used to split the string.
+ * Return: an array of pointers to the tokens.
+ */
+char **tokenize(char *str, const char *delim)
+{
+	char *token = NULL;
+	char **ret = NULL;
+	int i = 0;
+
+	token = strtok(str, delim);
+	while (token)
+	{
+		ret = realloc(ret, sizeof(char *) * (i + 1));
+		if (ret == NULL)
+			return (NULL);
+
+		ret[i] = malloc(_strlen(token) + 1);
+		if (!(ret[i]))
+			return (NULL);
+
+		br_strcpy(ret[i], token);
+		token = strtok(NULL, delim);
+		i++;
+	}
+	ret = realloc(ret, (i + 1) * sizeof(char *));
+	if (!ret)
+		return (NULL);
+
+	ret[i] = NULL;
+	return (ret);
+}
+
+/**
  * tokenize_input - splits a user input string into tokens
  * @input: the user input string to be tokenized
  * Return: an array of pointers to the tokens, or NULL if an error occurs
