@@ -10,6 +10,7 @@ int execute(char **argv)
 	int status = 0;
 	char *cmd_path;
 	char *envp[2];
+	cmd_path = NULL;
 
 	if (!argv || !*argv)
 		return (status);
@@ -49,6 +50,7 @@ int execute(char **argv)
 		do {
 			waitpid(id, &status, WUNTRACED);
 		} while (!WIFEXITED(status) && !WIFSIGNALED(status));
+		free(cmd_path);
 	}
 	return (status);
 }
