@@ -23,6 +23,7 @@ char *find_in_path(char *command)
 	char **dirs;
 	struct stat st;
 	char buf[PATH_MAX_LENGTH];
+	int found = 0;
 
 	path = get_path();
 	if (!path)
@@ -40,11 +41,17 @@ char *find_in_path(char *command)
 		if (stat(buf, &st) == 0 && S_ISREG(st.st_mode) && (st.st_mode & S_IXUSR))
 		{
 			full_path = br_strdup(buf);
+			found = 1;
 			break;
 		}
 	}
 	free_tokens(dirs);
 	free(path);
+	if (!found)
+	{
+		free(full_path);
+		full_path = NULL;
+	}
 	return (full_path);
 }
 /**
