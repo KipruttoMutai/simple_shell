@@ -64,6 +64,8 @@ int br_strcmp(const char *s1, const char *s2);
 int br_atoi(const char *str);
 int br_strncmp(const char *s1, const char *s2, size_t n);
 char *br_strcpy(char *dest, char *src);
+char *br_memset(char *s, char b, unsigned int n);
+char *br_strcat(char *dest, const char *src);
 
 /*MAIN FUNCTION*/
 int execute(char **argv);

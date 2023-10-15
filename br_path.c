@@ -40,18 +40,19 @@ char *find_in_path(char *command)
 		stat_ret = stat(buf, &st);
 		if (stat(buf, &st) == 0 && S_ISREG(st.st_mode) && (st.st_mode & S_IXUSR))
 		{
-			free_tokens(dir);
+			free_tokens(dirs);
 			ret = malloc(sizeof(char) * (strlen(buf) + 1));
 			if (!ret)
 				return (NULL);
 			strcpy(ret,buf);
 			return (ret);
 		}
-		if (stat_ret == -1)
-			free_tokens(dir);
-		return (NULL);
 	}
+	if (stat_ret == -1)
+		free_tokens(dirs);
+	return (NULL);
 }
+
 /**
  * free_error - frees alloc'd pointers following system error
  * @argv: pointer to a pointer to an array of pointers
