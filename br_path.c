@@ -18,41 +18,39 @@ char *get_path(void)
 char *find_in_path(char *command)
 {
 	int i;
-	char *full_path;
+	char *ret;
+	int stat_ret;
 	char *path;
 	char **dirs;
 	struct stat st;
 	char buf[PATH_MAX_LENGTH];
-	int found = 0;
 
 	path = get_path();
 	if (!path)
 		return (NULL);
 	dirs = tokenize(path, PATH_SEPARATOR);
 	if (!dirs)
-	{
-		free(path);
 		return (NULL);
-	}
-	full_path = NULL;
-	for (i = 0; dirs[i] != NULL; i++)
+	for (i = 0; dirs[i]; i++)
 	{
-		snprintf(buf, PATH_MAX_LENGTH, "%s/%s", dirs[i], command);
+		br_memset(buf, 0, PATH_MAX_LENGTH);
+		br_strcpy(buf, dirs[i]);
+		br_strcat(buf, "/");
+		br_strcat(buf, command);
+		stat_ret = stat(buf, &st);
 		if (stat(buf, &st) == 0 && S_ISREG(st.st_mode) && (st.st_mode & S_IXUSR))
 		{
-			full_path = br_strdup(buf);
-			found = 1;
-			break;
+			free_tokens(dir);
+			ret = malloc(sizeof(char) * (strlen(buf) + 1));
+			if (!ret)
+				return (NULL);
+			strcpy(ret,buf);
+			return (ret);
 		}
+		if (stat_ret == -1)
+			free_tokens(dir);
+		return (NULL);
 	}
-	free_tokens(dirs);
-	free(path);
-	if (!found)
-	{
-		free(full_path);
-		full_path = NULL;
-	}
-	return (full_path);
 }
 /**
  * free_error - frees alloc'd pointers following system error
