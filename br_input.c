@@ -17,7 +17,7 @@ char *get_input(void)
 		if (read_result == -1)
 		{
 			free(input);
-			br_puts("\n");
+			/*br_puts("\n");*/
 			return (NULL);
 		}
 		input[read_result - 1] = '\0';
