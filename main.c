@@ -56,7 +56,8 @@ int main(void)
 {
 	char *input;
 	char **args;
-	int status = 0, running = 1;
+	int status = 0;
+	int running = 1;
 
 	signal(SIGINT, handle_sigint);
 	signal(SIGQUIT, handle_sigquit);
@@ -73,7 +74,7 @@ int main(void)
 			free_tokens(args);
 			continue;
 		}
-		if (strcmp(args[0], "exit") == 0)
+		if (br_strcmp(args[0], "exit") == 0 || br_strcmp(args[0], "quit") == 0)
 			running = 0;
 		else
 		{
