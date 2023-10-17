@@ -56,12 +56,13 @@ int main(void)
 {
 	char *input;
 	char **args;
-	int status;
+	int status = 0, running = 1;
 
 	signal(SIGINT, handle_sigint);
 	signal(SIGQUIT, handle_sigquit);
 	signal(SIGTSTP, handle_sigstp);
-	do {
+	while (running)
+	{
 		input = get_input();
 		if (!input || !*input)
 			break;
@@ -72,11 +73,15 @@ int main(void)
 			free_tokens(args);
 			continue;
 		}
-		status = execute(args);
+		if (strcmp(args[0], "exit") == 0)
+			running = 0;
+		else
+		{
+			status = execute(args);
+		}
 		free(input);
 		free_tokens(args);
-		status = 1;
-	} while (status);
-	return (0);
+	}
+	return (status);
 }
 
