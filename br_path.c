@@ -44,7 +44,7 @@ char *find_in_path(char *command)
 			ret = malloc(sizeof(char) * (strlen(buf) + 1));
 			if (!ret)
 				return (NULL);
-			strcpy(ret,buf);
+			strcpy(ret, buf);
 			return (ret);
 		}
 	}
