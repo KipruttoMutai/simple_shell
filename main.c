@@ -8,10 +8,9 @@ int execute(char **argv)
 {
 	pid_t id;
 	int status = 0;
-	char *cmd_path;
-	char *envp[2];
-	cmd_path = NULL;
+	char *cmd_path, *envp[2];
 
+	cmd_path = NULL;
 	if (!argv || !*argv)
 		return (status);
 	if (check_for_builtin(argv))
@@ -24,25 +23,19 @@ int execute(char **argv)
 	}
 	if (id == -1)
 	{
-		perror(argv[0]);
-		free_tokens(argv);
-		free_last_input();
+		perror(argv[0]), free_tokens(argv), free_last_input();
 	}
 	if (id == 0)
 	{
 		envp[0] = get_path();
-		envp[1] = NULL;
-		cmd_path = NULL;
+		envp[1] = NULL, cmd_path = NULL;
 		if (argv[0][0] != '/')
 			cmd_path = find_in_path(argv[0]);
 		if (cmd_path == NULL)
 			cmd_path = argv[0];
 		if (execve(cmd_path, argv, envp) == -1)
 		{
-			perror(argv[0]);
-			free_tokens(argv);
-			free_last_input();
-			exit(EXIT_FAILURE);
+			perror(argv[0]), free_tokens(argv), free_last_input(), exit(EXIT_FAILURE);
 		}
 	}
 	else
