@@ -70,8 +70,10 @@ void br_cd(char **args)
 {
 	char *dir = args[1];
 	int ret;
+	char *pwd_args[4];
+	char current_directory[PATH_MAX_LENGTH];
 
-	if (dir == NULL)
+	if (dir == NULL || br_strcmp(dir, "") == 0)
 	{
 		dir = br_getenv("HOME");
 		if (dir == NULL)
@@ -86,13 +88,24 @@ void br_cd(char **args)
 	{
 		perror("cd");
 	}
+	else
+	{
+		if (getcwd(current_directory, sizeof(current_directory)) != NULL)
+		{
+			pwd_args[0] = "setenv";
+			pwd_args[1] = "PWD";
+			pwd_args[2] = current_directory;
+			pwd_args[3] = NULL;
+			br_setenv(pwd_args);
+		}
+	}
 }
 
 /**
  * br_clear - clears the terminal screen.
  * @args: an array of arguments
  * Return: 1 to continue executing,0 to exit
-*/
+ */
 int br_clear(char **args)
 {
 	(void)args;
