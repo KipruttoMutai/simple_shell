@@ -13,7 +13,7 @@ char *get_input(void)
 
 	do {
 		prompt();
-		read_result = getline(&input, &input_size, stdin);
+		read_result = br_getline(&input, &input_size, stdin);
 		if (read_result == -1)
 		{
 			free(input);
@@ -24,6 +24,52 @@ char *get_input(void)
 	} while (input[0] == '\0' || isspace(input[0]));
 	last_input = input;
 	return (input);
+}
+/**
+ * br_getline - Read a line of input from a file stream.
+ * @lineptr: A pointer to a char pointer where the line will be stored.
+ * @n: A pointer to the initial and final size of the buffer.
+ * @stream: The input file stream.
+ * Return: The number of characters read, or -1 for error or end of file.
+ */
+ssize_t br_getline(char **lineptr, size_t *n, FILE *stream)
+{
+	int c;
+	size_t read_size, i = 0;
+	char *new_lineptr;
+
+	if (lineptr == NULL || n == NULL)
+		return (-1);
+	if (*lineptr == NULL || *n == 0)
+	{
+		*n = 128;
+		*lineptr = (char *)malloc(*n);
+		if (*lineptr == NULL)
+			return (-1);
+	}
+	read_size = *n;
+	while (1)
+	{
+		if (i >= read_size)
+		{
+			read_size *= 2;
+			new_lineptr = (char *)realloc(*lineptr, read_size);
+			if (new_lineptr == NULL)
+				return (-1);
+			*lineptr = new_lineptr;
+		}
+		c = fgetc(stream);
+		if (c == EOF)
+			break;
+		(*lineptr)[i] = (char)c;
+		i++;
+		if (c == '\n')
+			break;
+	}
+	(*lineptr)[i] = '\0';
+	if (i == 0 && c == EOF)
+		return (-1);
+	return (i);
 }
 
 /**
